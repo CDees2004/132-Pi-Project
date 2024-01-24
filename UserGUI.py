@@ -4,20 +4,22 @@
 
 #KEY POINT: need to allow this GUI to influence the settings in the 
 # animation software... somehow. 
+import os 
+from tkinter import *  
 
-import tkinter as tk
-import subprocess
+window = Tk()
 
-def open_file():
-    subprocess.run(["python", "AnimationTest.py"])
-
+def openFile():
+    os.execvp("python", ["python", "AnimationFoldTest.py"])
 # Create the main Tkinter window
-root = tk.Tk()
 
-# Create a button that, when clicked, calls the open_file function
-button = tk.Button(root, text="Open Other Script", command=open_file)
+
+button = Button(window, text = "testing", command = openFile)
 button.pack()
+# Create a button that, when clicked, calls the open_file function
+#button = tk.Button(root, text="Open Other Script", command=openFile())
+#button.pack()
 
 # Run the Tkinter event loop
-root.mainloop()
+window.mainloop()
 
