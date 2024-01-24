@@ -1,11 +1,13 @@
+# import the needed libraries 
 import os
 import pygame
 import sys
 
+# initializing pyhgame
 pygame.init()
 
-# Set up display
-width, height = 800, 600
+# setting up the display window 
+width, height = 800, 600                    # POTENTIALLY CUSTOMIZABLE SETTING 
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Image Animation")
 
@@ -14,7 +16,7 @@ current_directory = os.getcwd()
 print("Current working directory:", current_directory)
 
 # Specify the name of your subfolder containing images
-subfolder_name = "subfolder_name"
+subfolder_name = "ImageFolder"
 
 # Construct the full path to the subfolder
 image_folder = os.path.join(current_directory, subfolder_name)
