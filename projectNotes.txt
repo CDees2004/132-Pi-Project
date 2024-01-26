@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------------------------------------------------------
+Hardware notes: 
+
+For the raspberry pi 4, if it is failing to display, ensure the back cables are fully and firmly plugged in FIRST
+then AFTER that plug in to the outlet. 
+
+Connects to internet easily via lan, no setup needed 
+----------------------------------------------------------------------------------------------------------------------------
+
+****CURRENT TOP PRIORITY***** 
+AnimationFoldTest - need to be able to access specific subfolders within in the image folder on command
+    - takes command from user gui to load specific subfolder 
+
+This will be achieved by having a function in the AnimFoldTest that takes 
+
+===============================================================================================================================
+AnimationFoldTest backup plan - worst case scenario, we put all animations in one folder and let it play as one continous video 
+                                since it already works when used for just one video 
+===============================================================================================================================
+
+Images captured by the camera will be appended to a list and this list will be cleared everytime the software runs
+    - potentially add a feature for them to save these frames as their own animation and add it to the folder of image subfolders 
+
+UserSettings - needs to open from the UserGuiTemp file. Within this file we need the ability to edit the settings within the main file 
+             - *** We need to be able to do this without it launching the pygame and running itself. 
+
+UserGuiTemp - Using third party tkinter software to make it look much better. 
+    *! Had to use: pip install customtkinter
+
