@@ -11,7 +11,7 @@ Connects to internet easily via lan, no setup needed
 AnimationFoldTest - need to be able to access specific subfolders within in the image folder on command
     - takes command from user gui to load specific subfolder 
 
-This will be achieved by having a function in the AnimFoldTest that takes 
+Looking into how to implement.
 
 ===============================================================================================================================
 AnimationFoldTest backup plan - worst case scenario, we put all animations in one folder and let it play as one continous video 
