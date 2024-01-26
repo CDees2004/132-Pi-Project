@@ -1,3 +1,4 @@
+
 # import the needed libraries 
 import os
 import pygame
@@ -7,55 +8,66 @@ import sys
 pygame.init()
 
 # setting up the display window 
-width, height = 800, 600                    # POTENTIALLY CUSTOMIZABLE SETTING 
+width, height = 1000, 800                    # POTENTIALLY CUSTOMIZABLE SETTING 
 screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Image Animation")
+pygame.display.set_caption("Animation")
 
-# Get the current working directory
+# get the current working directory
 current_directory = os.getcwd()
+
+# prints the current directory to the terminal 
+# helps for troubleshooting incase of directory errors 
 print("Current working directory:", current_directory)
 
-# Specify the name of your subfolder containing images
-subfolder_name = "ImageFolder"
+# specifying the name of the subfolder with the images
+image_folder_name = "ImageFolder"
 
-# Construct the full path to the subfolder
-image_folder = os.path.join(current_directory, subfolder_name)
+# constructs the full path to the subfolder
+image_folder = os.path.join(current_directory, image_folder_name)
 
-# Get a list of image paths in the specified folder
+# get a list of image paths in the specified folder
+# uses beautiful amazing LIST COMPREHENSION :)
 image_paths = [os.path.join(image_folder, file) for file in os.listdir(image_folder) if file.lower().endswith(('.png', '.jpg', '.jpeg'))]
 
-# Load images
+# load images
 images = [pygame.image.load(path) for path in image_paths]
 
-# Set initial image position
+# set initial image position
 image_rect = images[0].get_rect()
 image_rect.center = (width // 2, height // 2)
 
-# Set animation variables
-fps = 12  # Adjust the frames per second as needed
-clock = pygame.time.Clock()
+# set animation variables
+#fps = 12                        #CUSTOMIZABLE SETTING
+class settings:
+    vari_fps = 12
+
+    
+clock = pygame.time.Clock() 
 current_frame = 0
 
-# Main loop
+################################################################# 
+# MAIN ANIMATION LOOP:
+#################################################################
+
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # Draw the current frame
+    # draw the current frame
     screen.fill((255, 255, 255))  # White background
     screen.blit(images[current_frame], image_rect)
 
-    # Update animation frame
+    # update animation frame
     current_frame = (current_frame + 1) % len(images)
 
-    # Update display
+    # update display
     pygame.display.flip()
 
-    # Cap the frame rate
-    clock.tick(fps)
+    # cap the frame rate
+    clock.tick(settings.vari_fps)
 
-# Clean up and exit
+# clean up and exit
 pygame.quit()
 sys.exit()
