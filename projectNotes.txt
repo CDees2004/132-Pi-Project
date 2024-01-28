@@ -27,3 +27,19 @@ UserSettings - needs to open from the UserGuiTemp file. Within this file we need
 UserGuiTemp - Using third party tkinter software to make it look much better. 
     *! Had to use: pip install customtkinter
 
+----------------------------------------
+1 - 27 - 23 updates
+The image capture python folder now functions and takes pictures of the user according to a button press, then appends those images to the
+end of a list in order to run the animation software using that list. Issue lies in GPIO implementation rather than kb input. And a black 
+screen is all that is visible while taking pictures. The pictures still work however we want the user to be able to see themselves when taking 
+them. 
+
+Also we can *OPTIONALLY* add the feature to save these animations. This feature will be low prirority as we need to get the overall thing working 
+before we implement any bonus features like this. 
+
+*CURRENT TOP PRIORITY* - getting the subfolders to work with AnimationFoldTest. And getting the camera to show the user for ImageCapture.py. 
+The settings feature can be put off until these are both working fully, same with the ability to save users captured images. 
+
+*SECOND PRIORITY(EASIER TO DO) - taking our current userGUI and getting it in CustomTkinter, the much better looking version. Same commands for the 
+buttons but just hopefully nicer looking. 
+

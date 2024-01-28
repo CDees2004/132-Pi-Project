@@ -1,15 +1,17 @@
 
+# THIS IS THE FILE WE WANT TO TRANSFER OVER TO CUSTOM TKINTER OR JUST MAKE LOOK BETTER IN ANY WAY WE CAN 
+
 # import the needed libraries 
 from tkinter import *
 import os 
 
-# function that launches animation software when called
+# function that launches animation software / other files when called
 
 def openPreBuilt():
     os.execvp("python", ["python", "AnimationFoldTest.py"])
 
 def openImageCapture():
-    os.execvp("python", ["python", "CameraTesting.py"])
+    os.execvp("python", ["python", "ImageCapture.py"])
     
 def openSettings():
     os.execvp("python", ["python", "UserSettings.py"])
