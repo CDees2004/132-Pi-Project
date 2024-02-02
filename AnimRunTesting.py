@@ -3,6 +3,7 @@
 import os
 import pygame
 import sys
+#from PreloadOptions import InputHolder
 
 # initializing pyhgame
 pygame.init()
@@ -22,6 +23,7 @@ print("Current working directory:", current_directory)
 # specifying the name of the subfolder with the images
 image_folder_name = "ImageFolder"
 
+#subfolder_name = InputHolder.UserInput
 subfolder_name = "Gojo"
 
 
@@ -48,15 +50,46 @@ fps = 12                        #CUSTOMIZABLE SETTING
 clock = pygame.time.Clock() 
 current_frame = 0
 
+class Settings:
+    """
+    class just to hold and handle the users inputs
+    """
+    
+    def __init__(self):
+        self.fps = 12
+        
+    def update(self): 
+        keys = pygame.key.get_pressed()
+        
+        if keys[pygame.K_f] and self.fps == 12:
+            self.fps = 24
+        
+        elif keys[pygame.K_f] and self.fps == 24:
+            self.fps = 12
+            
+        # PART THAT RETURNS USER TO BASE GUI UPON KEYPRESS  
+        if keys[pygame.K_q]:
+            pygame.quit()
+            os.execvp("python", ["python", "UserGuiTemp.py"])
+            
+        
+    
+        
 ################################################################# 
 # MAIN ANIMATION LOOP:
 #################################################################
+
+settings = Settings()
 
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            
+    settings.update()   # PART THAT UPDATES USER KEY PRESSES 
+    fps = settings.fps
+    #print(fps)     # for troubleshooting 
 
     # draw the current frame
     screen.fill((255, 255, 255))  # White background
