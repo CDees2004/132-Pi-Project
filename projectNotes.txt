@@ -43,3 +43,16 @@ The settings feature can be put off until these are both working fully, same wit
 *SECOND PRIORITY(EASIER TO DO) - taking our current userGUI and getting it in CustomTkinter, the much better looking version. Same commands for the 
 buttons but just hopefully nicer looking. 
 
+---------------------------------------
+2 - 2 - 24 updates
+
+subfolder implementation is now funcitonal.
+There are working keybinds now within the main animation software. 
+    -> this removes the need for a settings menu as the details can be changed with a button press while the software is running. 
+
+Need to add ability for tkinter window to provide argument which will choose the correct animation subfolder to preload 
+
+
+
+
+
