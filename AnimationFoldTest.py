@@ -8,7 +8,8 @@ import sys
 pygame.init()
 
 # setting up the display window 
-width, height = 1000, 800                    # POTENTIALLY CUSTOMIZABLE SETTING 
+width, height = 600, 600                    
+fps = 12
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Animation")
 
@@ -36,11 +37,6 @@ images = [pygame.image.load(path) for path in image_paths]
 image_rect = images[0].get_rect()
 image_rect.center = (width // 2, height // 2)
 
-# set animation variables
-#fps = 12                        #CUSTOMIZABLE SETTING
-class settings:
-    vari_fps = 12
-
     
 clock = pygame.time.Clock() 
 current_frame = 0
@@ -56,7 +52,7 @@ while running:
             running = False
 
     # draw the current frame
-    screen.fill((255, 255, 255))  # White background
+    screen.fill((255, 255, 255))  
     screen.blit(images[current_frame], image_rect)
 
     # update animation frame
@@ -66,7 +62,7 @@ while running:
     pygame.display.flip()
 
     # cap the frame rate
-    clock.tick(settings.vari_fps)
+    clock.tick(fps)
 
 # clean up and exit
 pygame.quit()
