@@ -3,7 +3,7 @@
 import os
 import pygame
 import sys
-#from PreloadOptions import InputHolder
+from PreloadOptions import InputHolder
 
 # initializing pyhgame
 pygame.init()
@@ -24,7 +24,7 @@ print("Current working directory:", current_directory)
 image_folder_name = "ImageFolder"
 
 #subfolder_name = InputHolder.UserInput
-subfolder_name = "Sukuna"                 # want this to be variable 
+subfolder_name = InputHolder.UserInput                # want this to be variable 
 
 # constructs the full path to the subfolder
 image_folder = os.path.join(current_directory, image_folder_name)
