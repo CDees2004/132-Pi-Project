@@ -9,7 +9,7 @@ import sys
 pygame.init()
 
 # setting up the display window 
-width, height = 1000, 800                    # POTENTIALLY CUSTOMIZABLE SETTING 
+width, height = 720, 400                   
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Animation")
 
@@ -24,9 +24,7 @@ print("Current working directory:", current_directory)
 image_folder_name = "ImageFolder"
 
 #subfolder_name = InputHolder.UserInput
-subfolder_name = "Gojo"
-
-
+subfolder_name = "Sukuna"                 # want this to be variable 
 
 # constructs the full path to the subfolder
 image_folder = os.path.join(current_directory, image_folder_name)
@@ -42,6 +40,11 @@ image_paths = [os.path.join(subfolder, file) for file in os.listdir(subfolder) i
 images = [pygame.image.load(path) for path in image_paths]
 
 # set initial image position
+max_image_width = width 
+max_image_height = height 
+for index in range(len(images)):
+    images[index] = pygame.transform.scale(images[index], (max_image_width, max_image_height))
+    
 image_rect = images[0].get_rect()
 image_rect.center = (width // 2, height // 2)
 
@@ -72,6 +75,10 @@ class Settings:
             pygame.quit()
             os.execvp("python", ["python", "UserGuiTemp.py"])
             
+        if keys[pygame.K_p]:
+            self.fps = 1
+            if self.fps == 1 and keys[pygame.K_SPACE]:
+                self.fps = 12
         
     
         
