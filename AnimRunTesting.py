@@ -24,7 +24,7 @@ print("Current working directory:", current_directory)
 image_folder_name = "ImageFolder"
 
 #subfolder_name = InputHolder.UserInput
-subfolder_name = InputHolder.UserInput                # want this to be variable 
+subfolder_name = InputHolder.UserInput                # THIS ALLOWS USER TO PICK PRELOADED ANIM. 
 
 # constructs the full path to the subfolder
 image_folder = os.path.join(current_directory, image_folder_name)
@@ -49,7 +49,7 @@ image_rect = images[0].get_rect()
 image_rect.center = (width // 2, height // 2)
 
 # set animation variables
-fps = 12                        #CUSTOMIZABLE SETTING   
+fps = 12                        #Togglable with F   
 clock = pygame.time.Clock() 
 current_frame = 0
 
@@ -73,7 +73,7 @@ class Settings:
         # PART THAT RETURNS USER TO BASE GUI UPON KEYPRESS  
         if keys[pygame.K_q]:
             pygame.quit()
-            os.execvp("python", ["python", "UserGuiTemp.py"])
+            os.execvp("python", ["python", "Main.py"])
             
       
         
