@@ -1,11 +1,6 @@
+# File used for image capture feature of animation, using the pi camera
 
-# Name: Chandler Dees
-# Date: 1 - 27 - 24
-# Desc: 
-#     - version of the animation software that uses the raspberry pi camera 
-#     - for image capture and appends those images to a list, it then runs 
-#     - the base animation software using said list of captured images 
-
+# import all the needed libraries 
 import pygame
 import sys
 import os
@@ -14,20 +9,25 @@ from time import sleep
 
 pygame.init()
 
-# setting up the pygame display
-width, height = 800, 800
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Animation")
+# resolution for the animation display
+display_width, display_height = 800, 800
+screen = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption("Animaster Image Capture")
 
-# specifiying the folder to draw the images from
-img_folder = "ImageFolder" 
+#  resolution for capturing images
+#  SET SEPARATE FROM RESOLUTION FOR ANIMATION DISPLAY 
+#  SEPARATE!!!
+capture_width, capture_height = 800, 400
+
+# specifies ImageFolder ast the folder to draw the images from
+img_folder = "ImageFolder"  
 
 # function to load images from a folder
-def load_images(folder):
+def load_images(folder): # slightly different from version seen in the preloaded anim ver 
     images = [os.path.join(folder, file) for file in os.listdir(folder) if file.lower().endswith(('.png', 'jpg', '.jpeg'))]
     return [pygame.image.load(image) for image in images]
 
-# function to run the animation
+# a separate function to run the animation
 def run_animation(image_list):
     fps = 12
     clock = pygame.time.Clock()
@@ -38,47 +38,62 @@ def run_animation(image_list):
                 pygame.quit()
                 sys.exit()
         
-        # updates the animation frame
+        # updates the current frame
         current_frame = (current_frame + 1) % len(image_list)
 
         # draws the current frame
-        screen.fill((255, 255, 255))  # White background
+        screen.fill((255, 255, 255))  # white background
         screen.blit(image_list[current_frame], (0, 0))
 
         # updates display
         pygame.display.flip()
 
-        # sets the frame rate 
+        # selects the frame rate
         clock.tick(fps)
 
-# function to capture image
-def capture_image():
+# separate function to capture image
+def capture_image(camera):
     camera.capture('image.jpg')
-    #***APPENDS CAPTURED IMAGE TO LIST
     captured_images.append(pygame.image.load('image.jpg'))
 
-# sets up Raspberry Pi camera
+# setting up  the rasp pi camera
 camera = picamera.PiCamera()
+camera.resolution = (capture_width, capture_height)  # sets resolution for capturing images
 
-# MAIN loop
+# start the preview
+# preview is so the user can see what the camera sees while capturing their images 
+# VERY VERY FRAGILE, do NOT edit this.
+camera.start_preview()
+
+######################################################################
+# MAIN LOOP 
+######################################################################
+
 captured_images = []
+preview_active = True
 
-while True:
+while preview_active:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                # Capture image
-                capture_image()
+                # capture image
+                capture_image(camera)
                 print("Image captured.")
             elif event.key == pygame.K_RETURN:
-                # Run animation
-                if captured_images:
-                    print("Running animation...")
-                    run_animation(captured_images)
+                # ends the preview
+                camera.stop_preview()
+                preview_active = False
+                break
+
+# runs the captured animation
+if captured_images:
+    print("Running animation...")
+    run_animation(captured_images)
 
 # clean up camera
+# WILL NEED TO ADD GPIO CLEANUP DOWN HERE ALSO 
 camera.close()
-# once GPIO is implemented we also need gpio.cleanup
+
