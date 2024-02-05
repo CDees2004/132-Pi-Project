@@ -19,8 +19,8 @@ pygame.display.set_caption("Animaster Image Capture")
 #  SEPARATE!!!
 capture_width, capture_height = 800, 400
 
-# specifying a folder to draw the images from
-img_folder = "ImageFolder"  # Update with your image folder path
+# specifies ImageFolder ast the folder to draw the images from
+img_folder = "ImageFolder"  
 
 # function to load images from a folder
 def load_images(folder): # slightly different from version seen in the preloaded anim ver 
@@ -60,7 +60,7 @@ def capture_image(camera):
 camera = picamera.PiCamera()
 camera.resolution = (capture_width, capture_height)  # sets resolution for capturing images
 
-# Start the preview
+# start the preview
 # preview is so the user can see what the camera sees while capturing their images 
 # VERY VERY FRAGILE, do NOT edit this.
 camera.start_preview()
