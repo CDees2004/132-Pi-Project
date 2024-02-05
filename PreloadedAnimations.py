@@ -1,4 +1,10 @@
 
+#Name: chandler Dees  
+#Date: 2 - 8 - 23
+#Desc: file that takes in arguements and iterates the animation software
+#      through the appropriate subfolder which is specified by an argument 
+#      provided by the tkinter window.
+
 # import the needed libraries 
 import os
 import pygame
