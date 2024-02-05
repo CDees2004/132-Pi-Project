@@ -52,7 +52,24 @@ There are working keybinds now within the main animation software.
 
 Need to add ability for tkinter window to provide argument which will choose the correct animation subfolder to preload 
 
+---------------------------------------
+2 - 3 - 24 
 
+the image capture was being an absolute pain and getting it to function required a strong departure from the original version
+however this version works well.
+
+Preloaded animation selection for individual subfolders is now fully implemented
+
+---------------------------------------
+2 - 5 - 24 
+
+Get LEDs to react to keyboard press
+
+Transfer current GUI to customtkinter
+
+Add more preloaded animations 
+
+Adjust and ensure the GUI window size fits the Pi 
 
 
 
