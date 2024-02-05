@@ -75,10 +75,7 @@ class Settings:
             pygame.quit()
             os.execvp("python", ["python", "UserGuiTemp.py"])
             
-        if keys[pygame.K_p]:
-            self.fps = 1
-            if self.fps == 1 and keys[pygame.K_SPACE]:
-                self.fps = 12
+      
         
     
         
