@@ -5,63 +5,54 @@
 #      through the appropriate subfolder which is specified by an argument 
 #      provided by the tkinter window.
 
-# import the needed libraries 
 import os
 import pygame
 import sys
 from PreloadOptions import InputHolder
 
-# initializing pyhgame
+# Initializing pygame
 pygame.init()
 
-# setting up the display window 
+# Setting up the display window 
 width, height = 720, 400                   
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Animation")
 
-# get the current working directory
+# Get the current working directory
 current_directory = os.getcwd()
 
-# prints the current directory to the terminal 
-# helps for troubleshooting incase of directory errors 
+# Prints the current directory to the terminal 
+# Helps for troubleshooting in case of directory errors 
 print("Current working directory:", current_directory)
 
-# specifying the name of the subfolder with the images
+# Specifying the name of the subfolder with the images
 image_folder_name = "ImageFolder"
 
-#subfolder_name = InputHolder.UserInput
-subfolder_name = InputHolder.UserInput                # THIS ALLOWS USER TO PICK PRELOADED ANIM. 
+# Subfolder_name = InputHolder.UserInput
+subfolder_name = InputHolder.UserInput  # THIS ALLOWS THE USER TO PICK A PRELOADED ANIMATION
 
-# constructs the full path to the subfolder
+# Constructs the full path to the subfolder
 image_folder = os.path.join(current_directory, image_folder_name)
-
 subfolder = os.path.join(image_folder, subfolder_name)
 
+# Get a list of image paths in the specified folder
+# Uses list comprehension and sorts the paths
+image_paths = sorted([os.path.join(subfolder, file) for file in os.listdir(subfolder) if file.lower().endswith(('.png', '.jpg', '.jpeg'))])
 
-# get a list of image paths in the specified folder
-# uses beautiful amazing LIST COMPREHENSION :)
-image_paths = [os.path.join(subfolder, file) for file in os.listdir(subfolder) if file.lower().endswith(('.png', '.jpg', '.jpeg'))]
+# Load and scale images
+max_image_width, max_image_height = width, height
+images = [pygame.transform.scale(pygame.image.load(path), (max_image_width, max_image_height)) for path in image_paths]
 
-# load images
-images = [pygame.image.load(path) for path in image_paths]
-
-# set initial image position
-max_image_width = width 
-max_image_height = height 
-for index in range(len(images)):
-    images[index] = pygame.transform.scale(images[index], (max_image_width, max_image_height))
-    
+# Set initial image position
 image_rect = images[0].get_rect()
 image_rect.center = (width // 2, height // 2)
 
-# set animation variables
-fps = 12                        #Togglable with F   
 clock = pygame.time.Clock() 
 current_frame = 0
 
 class Settings:
     """
-    class just to hold and handle the users inputs
+    Class just to hold and handle the user's inputs
     """
     
     def __init__(self):
@@ -76,44 +67,36 @@ class Settings:
         elif keys[pygame.K_f] and self.fps == 24:
             self.fps = 12
             
-        # PART THAT RETURNS USER TO BASE GUI UPON KEYPRESS  
+        # Part that returns the user to the base GUI upon keypress  
         if keys[pygame.K_q]:
             pygame.quit()
-            os.execvp("python", ["python", "Main.py"])
-            
-      
-        
-    
-        
-################################################################# 
-# MAIN ANIMATION LOOP:
-#################################################################
+            os.execvp("python3", ["python", "Main.py"])
 
+# Main animation loop:
 settings = Settings()
-
 running = True
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            
-    settings.update()   # PART THAT UPDATES USER KEY PRESSES 
+    
+    settings.update()  # Part that updates user key presses 
     fps = settings.fps
-    #print(fps)     # for troubleshooting 
 
-    # draw the current frame
+    # Draw the current frame
     screen.fill((255, 255, 255))  # White background
     screen.blit(images[current_frame], image_rect)
 
-    # update animation frame
+    # Update animation frame
     current_frame = (current_frame + 1) % len(images)
 
-    # update display
+    # Update display
     pygame.display.flip()
 
-    # cap the frame rate
+    # Cap the frame rate
     clock.tick(fps)
 
-# clean up and exit
+# Clean up and exit
 pygame.quit()
 sys.exit()
