@@ -13,6 +13,7 @@ from PIL import Image
 import os
 
 class App(CTk):
+    
     def __init__(self):
         super().__init__()
         # GUI window properties
@@ -30,18 +31,18 @@ class App(CTk):
 
         # label for the title of the program 
         self.label_title = CTkLabel(master=self.frame_1, text="Animaster", text_color="black", width=2000,
-                                     height=2, font=("Century Gothic", 60), corner_radius=8, anchor="center", 
+                                     height=2, font=("Constantia", 60), corner_radius=8, anchor="center", 
                                      bg_color="white")
         self.label_title.place(relx=0.5, rely=0.1, anchor="center")
 
         # label for the phrase associated with the program 
         self.label_phrase = CTkLabel(master=self.frame_1, text="You Are the Master of Your Own Creation", text_color="white", 
-                                     width=120, height=1, font=("Century Gothic", 20), corner_radius=8, anchor="center")
+                                     width=120, height=1, font=("Constantia", 20), corner_radius=8, anchor="center")
         self.label_phrase.place(relx=0.5, rely=0.19, anchor="center")
 
         # button for launching the preloaded animation library
         self.btn = CTkButton(master=self.frame_1, text="Animation Library", corner_radius=32, fg_color="white", border_color="blue",
-                             border_width=2, text_color="black", height=50, width=50, hover_color="light blue", font=("Century Gothic", 20),
+                             border_width=2, text_color="black", height=50, width=200, hover_color="light blue", font=("Century Gothic", 20),
                              command=self.openPreBuilt)
         self.btn.place(relx=0.2, rely=0.5, anchor="center")
 
@@ -57,13 +58,6 @@ class App(CTk):
                               command=self.quitProgram)
         self.btn3.place(relx=0.5, rely=0.9, anchor="center")
         
-        # image previews for the choices 
-        #preloaded_img = CTkImage(Image.open("bgtest.jpg"), size = (200, 200))
-        
-        #button = CTkButton(master=app,image = preloaded_img, text="",width=200,height=200,compound='left')
-        #button.place(relx=0.5, rely=0.5, anchor=CENTER)
-        
-        
         # Loading Image for GUI (above preloaded)
         current_path = os.path.dirname(os.path.realpath(__file__))
         self.bg_image = CTkImage(Image.open(current_path + "/ImageFolder/MickeyModelSheet.jpg"),
@@ -71,12 +65,15 @@ class App(CTk):
         self.bg_image_label = CTkLabel(self, image=self.bg_image)
         self.bg_image_label.place(relx = 0.15,rely = 0.25)
         
-        # Loading Image for GUI (above Image capture)
+        
+        # Loading Image for GUI (above image capture)
         current_path = os.path.dirname(os.path.realpath(__file__))
-        self.bg_image = CTkImage(Image.open(current_path + "/ImageFolder/MickeyModelSheet.jpg"),
+        self.bg_image = CTkImage(Image.open(current_path + "/ImageFolder/JujutsuKaisenGenga.jpg"),
                                                size=(150, 125))
         self.bg_image_label = CTkLabel(self, image=self.bg_image)
-        self.bg_image_label.place(relx = 0.15,rely = 0.25)
+        self.bg_image_label.place(relx = 0.66,rely = 0.25)
+        
+
         
 
 
@@ -89,6 +86,7 @@ class App(CTk):
     
     def quitProgram(self):
         self.quit() 
+        
 
 app = App()
 app.mainloop()
