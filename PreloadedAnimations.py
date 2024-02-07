@@ -70,7 +70,7 @@ class Settings:
         # Part that returns the user to the base GUI upon keypress  
         if keys[pygame.K_q]:
             pygame.quit()
-            os.execvp("python3", ["python", "Main.py"])
+            os.execvp("python", ["python", "Main.py"])      # THIS IS DEPENDENT ON HARDWARE. FOR PI IT IS PYTHON3 FOR WINDOWS IT IS PYTHON!!!
 
 # Main animation loop:
 settings = Settings()
