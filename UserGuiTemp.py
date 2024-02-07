@@ -8,13 +8,11 @@ import os
 # function that launches animation software / other files when called
 
 def openPreBuilt():
-    os.execvp("python", ["python", "AnimationFoldTest.py"])
+    os.execvp("python", ["python", "AnimRunTesting.py"])
 
 def openImageCapture():
-    os.execvp("python", ["python", "ImageCapture.py"])
+    os.execvp("python", ["python", "ImageCaptureFINAL.py"])
     
-def openSettings():
-    os.execvp("python", ["python", "UserSettings.py"])
 
 # Create the main Tkinter window
 
@@ -28,9 +26,6 @@ class App(Frame):
 
         self.button2 = Button(master, text="View Prebuilt Animations", fg="white", bg="red", height=3, font=("Helvetica", 14, "bold"), command = openPreBuilt)
         self.button2.pack(side=TOP, fill=BOTH, pady=5)
-
-        self.button3 = Button(master, text="Settings", fg="white", bg="darkred", height=3, font=("Helvetica", 14, "bold"), command = openSettings)
-        self.button3.pack(side=TOP, fill=BOTH, pady=5)
 
         self.button4 = Button(master, text="Exit", fg="white", bg="green", height=3, font=("Helvetica", 14, "bold"), command = self.quit)
         self.button4.pack(side=TOP, fill=BOTH, pady=5)
