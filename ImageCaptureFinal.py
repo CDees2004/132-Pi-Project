@@ -1,3 +1,11 @@
+# Name: Chandler Dees
+# Date: 2 - 8 - 24
+# Desc: This file is the file used for dynamic image capturing 
+#       this allows the user to submit their own images at any 
+#       time utilizing the pi camera
+
+#import all of the needed libraries
+
 import pygame
 import sys
 import os
@@ -9,13 +17,17 @@ pygame.init()
 # sets up the resolution for the animation display
 display_width, display_height = 800, 800
 screen = pygame.display.set_mode((display_width, display_height))
-pygame.display.set_caption("Animation")
+pygame.display.set_caption("Image Capture Animation")
 
 # sets resolution for capturing images SEPARATELY 
 capture_width, capture_height = 800, 400
 
-# specifies ImageFolder as the  folder to draw the images from
-img_folder = "ImageFolder"  # Update with your image folder path
+# specifies the  folder to draw the images from
+img_folder = "ImageFolder"  # updated to ImageFolder
+
+# class dedicated to holding the settings that the user can change 
+# once the animation has been compiled. This updates, looking for 
+# inputs constatntly at the same time that the frames update. 
 
 class Settings:
     """
@@ -36,82 +48,94 @@ class Settings:
         # part that returns user to Main upon quit
         if keys[pygame.K_q]:
             pygame.quit()
-            os.execvp("python3", ["python3", "Main.py"])
+            os.execvp("python3", ["python3", "Main.py"])    # leave as python3 since this only works on raspbery pi 
 
-# Function to load images from a folder
+# function that loads the images from a folder
+
 def load_images(folder):
     images = [os.path.join(folder, file) for file in os.listdir(folder) if file.lower().endswith(('.png', 'jpg', '.jpeg'))]
     return [pygame.image.load(image) for image in images]
 
+# initializing an instance of the settings class so we can update it later
 settings = Settings()
 
 
-# Function to run the animation
+# function to run the animation
+# this is stored in a function to allow it to run separately after image capture
+# whereas the preloaded animatons would simply run this on its own automatically
+
 def run_animation(image_list, settings):
-    fps = 12
+    fps = 12    # by default it initializes the frames per second to 12 (eastern standard)
     clock = pygame.time.Clock()
     current_frame = 0
     while True:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:   # looks to see if the user ever wants to quit 
                 pygame.quit()
                 sys.exit()
         
-        settings.update()
+        settings.update() # checks for user setting input 
         fps = settings.fps
         
-        # Update animation frame
+        # updates the animation frame
         current_frame = (current_frame + 1) % len(image_list)
 
-        # Draw the current frame
+        # draws the current frame
         screen.fill((255, 255, 255))  # White background
         screen.blit(image_list[current_frame], (0, 0))
 
-        # Update display
+        # update the display
         pygame.display.flip()
 
-        # Cap the frame rate
+        # limits the frame rate to the user desired amount of either 12 or 24
         clock.tick(fps)
 
-# Function to capture image
+# a separate function used exclusively to capture images
+
 def capture_image(camera):
     camera.capture('image.jpg')
     captured_images.append(pygame.image.load('image.jpg'))
 
-# Set up Raspberry Pi camera
+# setting up Raspberry Pi camera
 camera = picamera.PiCamera()
-camera.resolution = (capture_width, capture_height)  # Set resolution for capturing images
+# sets the resolution for capturing images
+camera.resolution = (capture_width, capture_height)  
 
-# Start the preview
+# starts the preview
+# the preview is the window that allows users to see what the camera sees during the 
+# image capture portion of the program. THIS IS VITAL DONT BREAK IT
 camera.start_preview()
 
+##################
 # Main loop
+##################
 
-
+# initialize an empty list for the captured images to be appended to 
 captured_images = []
+# allows users to see themselves 
 preview_active = True
 
 while preview_active:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT:   # looks for quit 
             pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                # Capture image
+                # captures image
                 capture_image(camera)
                 print("Image captured.")
             elif event.key == pygame.K_RETURN:
-                # Stop the preview
+                # stops the preview
                 camera.stop_preview()
                 preview_active = False
                 break
 
-# Run animation
+# runs the animation
 if captured_images:
     print("Running animation...")
     run_animation(captured_images, settings)
 
-# Clean up camera
+# clean up camera
 camera.close()
 
