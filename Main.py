@@ -30,14 +30,14 @@ class App(CTk):
         self.frame_1.pack(pady = 20, padx = 60, fill = "both", expand = True)
 
         # label for the title of the program 
-        self.label_title = CTkLabel(master = self.frame_1, text = "Animaster", text_color = "black", width = 2000,
+        self.label_title = CTkLabel(master = self.frame_1, text = "Animaster", text_color = "white", width = 2000,
                                      height = 2, font = ("Constantia", 60), corner_radius = 8, anchor = "center", 
-                                     bg_color = "white")
+                                     bg_color = "black")
         self.label_title.place(relx = 0.5, rely = 0.1, anchor = "center")
 
         # label for the phrase associated with the program 
         self.label_phrase = CTkLabel(master = self.frame_1, text = "You Are the Master of Your Own Creation", text_color = "white", 
-                                     width = 120, height = 1, font = ("Constantia", 20), corner_radius = 8, anchor = "center")
+                                     width = 120, height = 1, font = ("Constantia", 20), corner_radius = 8, anchor = "center", bg_color = "black")
         self.label_phrase.place(relx = 0.5, rely = 0.19, anchor = "center")
 
         # button for launching the preloaded animation library
@@ -53,16 +53,16 @@ class App(CTk):
         self.btn2.place(relx = 0.75, rely = 0.6, anchor = "center")
 
         # button for exiting the software
-        self.btn3 = CTkButton(master = self.frame_1, text = "Exit", corner_radius = 32, fg_color = "white", border_color = "red",
-                              border_width = 2, text_color = "black", height = 50, width = 750, hover_color = "pink", font = ("Constantia", 20),
+        self.btn3 = CTkButton(master = self.frame_1, text = "Exit", corner_radius = 32, fg_color = "black", border_color = "black",
+                              border_width = 2, text_color = "white", height = 20, width = 20, hover_color = "blue", font = ("Constantia", 20),
                               command = self.quitProgram)
-        self.btn3.place(relx = 0.5, rely = 0.7, anchor = "center")
+        self.btn3.place(relx = 0.9, rely = 0.7, anchor = "center")
         
         # preview Image for GUI (above preloaded)
         current_path = os.path.dirname(os.path.realpath(__file__))
         self.bg_image = CTkImage(Image.open(current_path + "/ImageFolder/MickeyModelSheet.jpg"),
                                                size = (300, 180))
-        self.bg_image_label = CTkLabel(self, image=self.bg_image)
+        self.bg_image_label = CTkLabel(self, image=self.bg_image, text = "")
         self.bg_image_label.place(relx = 0.1,rely = 0.25)
         
         
@@ -70,7 +70,7 @@ class App(CTk):
         current_path = os.path.dirname(os.path.realpath(__file__))
         self.bg_image = CTkImage(Image.open(current_path + "/ImageFolder/JujutsuKaisenGenga.jpg"),
                                                size = (300, 180))
-        self.bg_image_label = CTkLabel(self, image=self.bg_image)
+        self.bg_image_label = CTkLabel(self, image=self.bg_image, text = "")
         self.bg_image_label.place(relx = 0.53,rely = 0.25)
         
         
