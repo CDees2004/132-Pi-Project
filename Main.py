@@ -56,7 +56,7 @@ class App(CTk):
         self.btn3 = CTkButton(master = self.frame_1, text = "Exit", corner_radius = 32, fg_color = "black", border_color = "black",
                               border_width = 2, text_color = "white", height = 20, width = 20, hover_color = "blue", font = ("Constantia", 20),
                               command = self.quitProgram)
-        self.btn3.place(relx = 0.9, rely = 0.7, anchor = "center")
+        self.btn3.place(relx = 0.9, rely = 0.68, anchor = "center")
         
         # preview Image for GUI (above preloaded)
         current_path = os.path.dirname(os.path.realpath(__file__))
@@ -68,7 +68,7 @@ class App(CTk):
         
         # pewview Image for GUI (above image capture)
         current_path = os.path.dirname(os.path.realpath(__file__))
-        self.bg_image = CTkImage(Image.open(current_path + "/ImageFolder/JujutsuKaisenGenga.jpg"),
+        self.bg_image = CTkImage(Image.open(current_path + "/ImageFolder/ChosoImage.png"),
                                                size = (300, 180))
         self.bg_image_label = CTkLabel(self, image=self.bg_image, text = "")
         self.bg_image_label.place(relx = 0.53,rely = 0.25)
@@ -76,10 +76,10 @@ class App(CTk):
         
     # functions that allow this window to launch the other windows/ exit
     def openPreBuilt(self):
-        os.execvp("python", ["python", "PreloadedAnimations.py"])
+        os.execvp("python3", ["python3", "PreloadedAnimations.py"])
     
     def openImageCapture(self):
-        os.execvp("python", ["python", "ImageCaptureFINAL.py"])
+        os.execvp("python3", ["python3", "ImageCaptureFinal.py"])
     
     def quitProgram(self):
         self.quit() 
