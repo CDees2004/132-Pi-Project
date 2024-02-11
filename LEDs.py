@@ -1,4 +1,7 @@
 
+# Name: Mars
+# Date: 2 - 8 - 24
+# Desc:
 #software that constantly fades through all colors 
 # in a constant loop, this will either be playing on a separate pi
 # constantly or heavily altered and made to flash when image is captured
