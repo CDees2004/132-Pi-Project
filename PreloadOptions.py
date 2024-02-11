@@ -1,3 +1,7 @@
+
+# Name: Chandler Dees
+# Date: 2 - 8 - 24
+# Desc: 
 # here we want another tkinter window that has several options
 # these are the preloaded animations and clicking one will run it 
 # we want to make it so that for this window once the chosen animation runs 
@@ -8,6 +12,7 @@
 
 
 # import the needed GUI library  
+from turtle import bgcolor
 from customtkinter import *
 from PIL import Image
 
@@ -53,17 +58,30 @@ class App(CTk):
                                      width = 120, height = 1, font = ("Constantia", 20), corner_radius = 8, anchor = "center")
         self.label_phrase.place(relx = 0.5, rely = 0.19, anchor = "center")
 
-        # button for launching the preloaded animation library
+        # button for launching the Gojo library
         self.btn = CTkButton(master = self.frame, text = "Gojo", corner_radius = 32, fg_color = "white", border_color = "blue",
                              border_width = 2, text_color = "black", height = 50, width = 150, hover_color = "light blue", font = ("Constantia", 20),
                              command = self.change_input_gojo)
         self.btn.place(relx = 0.13, rely = 0.5, anchor = "center")
 
-        # button for launching the image capture software
+        # button for launching the Sukuna library
         self.btn2 = CTkButton(master = self.frame, text = "Sukuna", corner_radius = 32, fg_color = "white", border_color = "blue",
                               border_width = 2, text_color = "black", height = 50, width = 150, hover_color = "light blue", font = ("Constantia", 20),
                               command = self.change_input_sukuna)
-        self.btn2.place(relx = 0.4, rely = 0.5, anchor = "center")
+        self.btn2.place(relx = 0.38, rely = 0.5, anchor = "center")
+
+         # button for launching the Mickey library
+        self.btn3 = CTkButton(master = self.frame, text = "Mickey", corner_radius = 32, fg_color = "white", border_color = "blue",
+                              border_width = 2, text_color = "black", height = 50, width = 150, hover_color = "light blue", font = ("Constantia", 20),
+                              command = self.change_input_mickey)
+        self.btn3.place(relx = 0.625, rely = 0.5, anchor = "center")
+
+        # button for launching the Ghibli library
+        self.btn4 = CTkButton(master = self.frame, text = "Ghibli", corner_radius = 32, fg_color = "white", border_color = "blue",
+                              border_width = 2, text_color = "black", height = 50, width = 150, hover_color = "light blue", font = ("Constantia", 20),
+                              command = self.change_input_ghibli)
+        self.btn4.place(relx = 0.87, rely = 0.5, anchor = "center")
+        
         
         # preview Image for Gojo animation (above Gojo)
         current_path = os.path.dirname(os.path.realpath(__file__))
@@ -75,9 +93,25 @@ class App(CTk):
         # preview Image for Sukuna animation (above Sukuna)
         current_path = os.path.dirname(os.path.realpath(__file__))
         self.bg_image = CTkImage(Image.open(current_path + "/ImageFolder/SukunaPreview.png"),
+                                               size = (140, 100))
+        self.bg_image_label = CTkLabel(self, image=self.bg_image, text = "")
+        self.bg_image_label.place(relx = 0.31,rely = 0.25)
+        
+        # preview Image for Mickey animation (above Mickey)
+        current_path = os.path.dirname(os.path.realpath(__file__))
+        self.bg_image = CTkImage(Image.open(current_path + "/ImageFolder/MickeyPreview.PNG"),
                                                size = (130, 100))
         self.bg_image_label = CTkLabel(self, image=self.bg_image, text = "")
-        self.bg_image_label.place(relx = 0.33,rely = 0.25)
+        self.bg_image_label.place(relx = 0.53,rely = 0.25)
+
+        # Preview Image for Ghibli animation (above Ghibli)
+        current_path = os.path.dirname(os.path.realpath(__file__))
+        self.bg_image = CTkImage(Image.open(current_path + "/ImageFolder/GhibliPreview.PNG"),
+                                               size = (135, 100))
+        self.bg_image_label = CTkLabel(self, image=self.bg_image, text = "")
+        self.bg_image_label.place(relx = 0.735,rely = 0.25)
+
+        
         
         
         # confirm button which closes the window and compiles the chosen animation
@@ -85,7 +119,7 @@ class App(CTk):
         self.btn3 = CTkButton(master = self.frame, text = "Confirm", corner_radius = 32, fg_color = "white", border_color = "blue",
                               border_width = 2, text_color = "black", height = 50, width = 250, hover_color = "light blue", font = ("Constantia", 20),
                               command = close_window)
-        self.btn3.place(relx = 0.8, rely = 0.95, anchor = "center")
+        self.btn3.place(relx = 0.8, rely = 0.6, anchor = "center")
     
        
         
@@ -96,6 +130,12 @@ class App(CTk):
         
     def change_input_sukuna(self):
         InputHolder.UserInput = "Sukuna"
+
+    def change_input_mickey(self):
+        InputHolder.UserInput = "Mickey"
+
+    def change_input_ghibli(self):
+        InputHolder.UserInput = "Ghibli"
 
 
 app = App()
