@@ -1,0 +1,21 @@
+This was originally a text document to list out the software details so my group mates knew the status and how to contribute.
+However they did not participate in the project so I am changing this file to be a description of the software and how to use it.
+
+Animaster is an animation compilation software that can be used in combination with the raspberry pi for dynamic compilation of 
+animations of captured images.
+
+To use Animaster: 
+Run the Main.py file. From here you are presented two choices, the image capture feature only works if you are using a raspberry pi 
+in combination with a raspberry pi camera. If I get time in the future I will change this to communicate with an image scanner for 
+more professional use cases. 
+
+Once you select the animation library option you can run any of the preloaded animations that exist within your designated image folder
+the ones currently listed are examples from my ImageFolder and for you to use them change the name of "ImageFolder" to match the folder
+where you are storing all your animation frames and change the various values of InputHolder like "Micky" to fit the names of your subfolders. 
+
+Have fun animating - Chandler Dees, TheLaddestLad.
+
+----------------------------------------------------------------------------------------------------------------------------
+BIG NOTE:
+For all of the functions that use execvp on the raspberry pi it needs the command "python3" rather than "python"
+It will not work on the raspberry pi at all unless that specific change is made!
